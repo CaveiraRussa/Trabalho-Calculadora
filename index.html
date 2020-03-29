@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="script.js"></script>
+    <title>Calc</title>
+</head>
+<style>
+body
+{
+    margin: 0;  /* remover a margem automatica que toda pagina html tem no body */
+    user-select: none;  /* inpedir que selecione os textos dos botões */
+}
+
+.container
+{
+    width: 100vw; /* preencher 100% da largura da tela (medida vw = View Width) */
+    height: 100vh; /* preencher 100% da altura da tela (medida vh = View Height) */
+    background-color: rgb(77, 77, 148); /* cor de fundo */
+    display: flex; /* tornara si mesmo como flexivel podendo alterar alinhamentos */
+    justify-content: center;  /* alinhar conteudo interno horizontalmente*/
+    align-items: center; /* alinhar conteudo interno verticalmente*/
+}
+.calculadora
+{
+    width: fit-content; /* se adaptar ao tamanho do conteudo interno */
+    height: fit-content; /* se adaptar ao altura do conteudo interno */
+    background-color: rgb(60, 60, 60); /* cor de fundo */
+    border: 10px solid rgb(60, 60, 60); /* bordas */
+    border-radius: 10px; /* bordas arredondadas */
+}
+
+.row div
+{
+    display: flex;  /* tornara si mesmo como flexivel podendo alterar alinhamentos */
+    flex-direction: row;  /* alinhar conteudo em uma linha */
+}
+
+input
+{
+    text-align: right; /* altera alinhamento do texto para a direita */
+    font-size: 30px; /* tamanho da fonte */
+    border: none; /* remove bordas padrão de input */
+    margin: 1px; /* margem para afastar os elementos ao redor */
+    width: 100%; /* preenche 100% do espaço disponivel a ela*/
+    height: 50px; /* altura fixa */
+    background-color:whitesmoke; /* cor de fundo */
+    padding: 0px 10px; /* adiciona uma margem interna ao contundo dela mesma */
+}
+
+input:focus, /* ativa a classe ao estar focado nela, no caso estar escrevendo nela */
+input:hover /* ativa a classe ao passar o mouse por cima */
+{
+    background-color: rgb(200, 200, 200);
+}
+
+input::placeholder /* altera as propriendades do titulo que é exibo no campo de texto */
+{
+    font-size: 16px; /* tamanho da fonte */
+    justify-content: center;  /* alinhar conteudo interno horizontalmente*/
+    text-align: center; /* alinhar texto interno verticalmente*/
+}
+
+input::-webkit-inner-spin-button /* remove botões padrão de inputs do tipo number */
+{
+  -webkit-appearance: none; /* desativa o visual padrão inseriodo de cada navegador */
+}
+
+button
+{
+    border: none;
+    width: calc(100% / 4);
+    height: 50px;
+    margin: 1px;
+    padding: 5px;
+    font-size: 20px;
+}
+
+button:hover
+{
+    background-color: rgb(60, 60, 60);
+    color: white;
+    border: 2px solid white;
+}
+
+button.igual
+{
+    width: 100%;
+}
+
+</style>
+<body>
+    <div class="container">
+        <form class="calculadora">
+            <div class="row">
+                <div>
+                    <input type="number" placeholder="Clique nos botões ou use o teclado." autofocus> <!-- autofocus inicializa pronto pra digitar -->
+                </div>
+            </div>
+            <div class="row">
+                <div>
+                    <button onclick="botoes(1)">1</button>
+                    <button onclick="botoes(2)">2</button>
+                    <button onclick="botoes(3)">3</button>
+                    <button>+</button>
+                </div>
+            </div>
+            <div class="row">
+                <div>
+                    <button onclick="botoes(4)">4</button>
+                    <button onclick="botoes(5)">5</button>
+                    <button onclick="botoes(6)">6</button>
+                    <button>-</button>
+                </div>
+            </div>
+            <div class="row">
+                <div>
+                    <button onclick="botoes(7)">7</button>
+                    <button onclick="botoes(8)">8</button>
+                    <button onclick="botoes(9)">9</button>
+                    <button>x</button>
+                </div>
+            </div>
+            <div class="row">
+                <div>
+                    <button>C</button>
+                    <button onclick="botoes(0)">0</button>
+                    <button onclick="botoes(',')">,</button>
+                    <button>÷</button>
+                </div>
+            </div>
+            <div class="row">
+                <div>
+                    <button class="igual">=</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
