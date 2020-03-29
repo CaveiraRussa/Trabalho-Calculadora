@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="script.js"></script>
-    <title>Calc</title>
+    <title>Calculadora</title>
 </head>
 <style>
 body
 {
     margin: 0;  /* remover a margem automatica que toda pagina html tem no body */
     user-select: none;  /* inpedir que selecione os textos dos botões */
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
 .container
@@ -19,6 +19,7 @@ body
     height: 100vh; /* preencher 100% da altura da tela (medida vh = View Height) */
     background-color: rgb(77, 77, 148); /* cor de fundo */
     display: flex; /* tornara si mesmo como flexivel podendo alterar alinhamentos */
+    flex-direction: column;
     justify-content: center;  /* alinhar conteudo interno horizontalmente*/
     align-items: center; /* alinhar conteudo interno verticalmente*/
 }
@@ -31,13 +32,19 @@ body
     border-radius: 10px; /* bordas arredondadas */
 }
 
-.row div
+.row div,
+.row div form
 {
     display: flex;  /* tornara si mesmo como flexivel podendo alterar alinhamentos */
     flex-direction: row;  /* alinhar conteudo em uma linha */
 }
 
-input
+form
+{
+    width: 100%;
+}
+
+input.texto
 {
     text-align: right; /* altera alinhamento do texto para a direita */
     font-size: 30px; /* tamanho da fonte */
@@ -49,25 +56,20 @@ input
     padding: 0px 10px; /* adiciona uma margem interna ao contundo dela mesma */
 }
 
-input:focus, /* ativa a classe ao estar focado nela, no caso estar escrevendo nela */
-input:hover /* ativa a classe ao passar o mouse por cima */
+input.texto:focus, /* ativa a classe ao estar focado nela, no caso estar escrevendo nela */
+input.texto:hover /* ativa a classe ao passar o mouse por cima */
 {
     background-color: rgb(200, 200, 200);
 }
 
-input::placeholder /* altera as propriendades do titulo que é exibo no campo de texto */
+input.texto::placeholder /* altera as propriendades do titulo que é exibo no campo de texto */
 {
     font-size: 16px; /* tamanho da fonte */
     justify-content: center;  /* alinhar conteudo interno horizontalmente*/
     text-align: center; /* alinhar texto interno verticalmente*/
 }
 
-input::-webkit-inner-spin-button /* remove botões padrão de inputs do tipo number */
-{
-  -webkit-appearance: none; /* desativa o visual padrão inseriodo de cada navegador */
-}
-
-button
+input
 {
     border: none;
     width: calc(100% / 4);
@@ -77,65 +79,109 @@ button
     font-size: 20px;
 }
 
-button:hover
+.botoes input:hover
 {
     background-color: rgb(60, 60, 60);
     color: white;
     border: 2px solid white;
 }
 
-button.igual
+.botoes input.igual
 {
     width: 100%;
 }
 
+div.titulo
+{
+    font-size: 40px;
+    color: whitesmoke;
+    margin-bottom: 20px;
+}
+
 </style>
+<script>
+    var input = document.getElementById("textview");
+    input.addEventListener("keyup", function(event) {
+        if (event.keyCode === 13) {
+            event.preventDefault();
+            document.getElementById("igual").click();
+        }
+    });
+
+    function insert(valor)
+    {
+        document.form.textview.value = document.form.textview.value + valor;
+    }
+
+    function equal()
+    {
+        var texto = document.form.textview.value;
+        if(texto){
+            document.form.textview.value = eval(texto);
+        }
+        alert('foi');
+    }
+
+    function clean()
+    {
+        document.form.textview.value = "";
+    }
+
+</script>
 <body>
     <div class="container">
-        <form class="calculadora">
+        <div class="row">
+            <div class="titulo">
+                <span>Calculadora</span>
+            </div>
+        </div>
+        <div class="calculadora">
             <div class="row">
                 <div>
-                    <input type="number" placeholder="Clique nos botões ou use o teclado." autofocus> <!-- autofocus inicializa pronto pra digitar -->
+                    <form name="form" autocomplete="off">
+                        <input id="textview" type="textview" name="textview" class="texto" onkeyup="enter(event)" placeholder="Clique nos botões ou use o teclado."/>
+                    </form>
                 </div>
             </div>
             <div class="row">
-                <div>
-                    <button onclick="botoes(1)">1</button>
-                    <button onclick="botoes(2)">2</button>
-                    <button onclick="botoes(3)">3</button>
-                    <button>+</button>
+                <div class="botoes">
+                    <input type="button" value="1" onclick="insert(1)">
+                    <input type="button" value="2" onclick="insert(2)">
+                    <input type="button" value="3" onclick="insert(3)">
+                    <input type="button" value="+" onclick="insert('+')">
                 </div>
             </div>
             <div class="row">
-                <div>
-                    <button onclick="botoes(4)">4</button>
-                    <button onclick="botoes(5)">5</button>
-                    <button onclick="botoes(6)">6</button>
-                    <button>-</button>
+                <div class="botoes">
+                    <input type="button" value="4" onclick="insert(4)">
+                    <input type="button" value="5" onclick="insert(5)">
+                    <input type="button" value="6" onclick="insert(6)"> 
+                    <input type="button" value="-" onclick="insert('-')">
                 </div>
             </div>
             <div class="row">
-                <div>
-                    <button onclick="botoes(7)">7</button>
-                    <button onclick="botoes(8)">8</button>
-                    <button onclick="botoes(9)">9</button>
-                    <button>x</button>
+                <div class="botoes">
+                    <input type="button" value="7" onclick="insert(7)">
+                    <input type="button" value="8" onclick="insert(8)">
+                    <input type="button" value="9" onclick="insert(9)">
+                    <input type="button" value="x" onclick="insert('*')">
                 </div>
             </div>
             <div class="row">
-                <div>
-                    <button>C</button>
-                    <button onclick="botoes(0)">0</button>
-                    <button onclick="botoes(',')">,</button>
-                    <button>÷</button>
+                <div class="botoes">
+                    <input type="button" value="C" onclick="clean()">
+                    <input type="button" value="0" onclick="insert(0)">
+                    <input type="button" value="." onclick="insert('.')">
+                    <input type="button" value="÷" onclick="insert('/')">
                 </div>
             </div>
             <div class="row">
-                <div>
-                    <button class="igual">=</button>
+                <div class="botoes">
+                    <input id="igual" class="igual" type="button" value="=" onclick="equal()" >
                 </div>
             </div>
-        </form>
+        </div>
     </div>
 </body>
+
 </html>
