@@ -99,26 +99,6 @@ div.titulo
 }
 
 </style>
-<script>
-    function insert(valor)
-    {
-        document.form.textview.value = document.form.textview.value + valor;
-    }
-
-    function equal()
-    {
-        var texto = document.form.textview.value;
-        if(texto){
-            document.form.textview.value = eval(texto);
-        }
-    }
-
-    function clean()
-    {
-        document.form.textview.value = "";
-    }
-
-</script>
 <body>
     <div class="container">
         <div class="row">
@@ -174,5 +154,32 @@ div.titulo
         </div>
     </div>
 </body>
+<script>
+    var input = document.getElementById("textview");
+    input.addEventListener("keydown", function(event) {
+        if (event.keyCode === 13) {
+            event.preventDefault();
+            document.getElementById("igual").click();
+        }
+    });
 
+    function insert(valor)
+    {
+        document.form.textview.value = document.form.textview.value + valor;
+    }
+
+    function equal()
+    {
+        var texto = document.form.textview.value;
+        if(texto){
+            document.form.textview.value = eval(texto);
+        }
+        alert('foi');
+    }
+
+    function clean()
+    {
+        document.form.textview.value = "";
+    }
+</script>
 </html>
